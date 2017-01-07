@@ -152,6 +152,16 @@ static const uint8_t  gamma7[] = {
    226, 227, 229, 231, 233, 235, 237, 239, 241, 243, 245, 247, 249, 251, 253, 255 };
 
 
-const uint8_t *gamma_dither[WS2812_DITHER_NUM] = {gamma0,gamma1,gamma2,gamma3,gamma4,gamma5,gamma6,gamma7};
+#if WS2812_DITHER_NUM == 1
+  const uint8_t *gamma_dither[WS2812_DITHER_NUM] = {gamma0};
+#elif WS2812_DITHER_NUM == 2
+  const uint8_t *gamma_dither[WS2812_DITHER_NUM] = {gamma0,gamma1};
+#elif WS2812_DITHER_NUM == 4
+  const uint8_t *gamma_dither[WS2812_DITHER_NUM] = {gamma0,gamma1,gamma2,gamma3};
+#elif WS2812_DITHER_NUM == 8
+  const uint8_t *gamma_dither[WS2812_DITHER_NUM] = {gamma0,gamma1,gamma2,gamma3,gamma4,gamma5,gamma6,gamma7};
+#else
+  #error Invalid WS2812_DITHER_NUM value. Allowed values are 1, 2, 4, or 8.
+#endif
 
 // end of file
